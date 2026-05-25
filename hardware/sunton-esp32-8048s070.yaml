@@ -17,6 +17,7 @@ esp32:
     type: esp-idf
     advanced:
       execute_from_psram: true
+      loop_task_stack_size: 16384 # increase stack size so we dont get stack overflow with lvgl 9
 
 psram:
   mode: octal
