@@ -28,6 +28,7 @@ substitutions:
   display_night_minute: "0"
   display_backlight_timeout_always_enabled: "false"
   display_backlight_timeout_initial: ".12"
+  timezone: "Europe/Vienna"
 
 globals:
   - id: boot_restart_published
@@ -76,11 +77,9 @@ light:
   # not detect motion)
 
 time:
-  # Time source is swappable: default Home Assistant, or set
-  #   substitutions: { time_source: sntp }
-  # for a standalone (no-HA) device that gets time from NTP.
-  - platform: ${time_source | default("homeassistant")}
+  - platform: sntp
     id: system_time
+    timezone: ${timezone}
     on_time_sync:
       - script.execute: time_update
 

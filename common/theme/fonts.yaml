@@ -52,6 +52,9 @@ font:
     bpp: 8
     glyphs: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~°€ÄÖÜäöüß"  
     # glyphsets: ${glyphsets | default("GF_Latin_Kernel")}
+    extras:
+      - file: 'https://github.com/Templarian/MaterialDesign-Webfont/raw/v7.4.47/fonts/materialdesignicons-webfont.ttf'
+        glyphs: [ "\U000F0140" ]
 
   - file: "esphome-modular-lvgl-buttons/assets/fonts/Nunito-SemiBold.ttf"
     id: nunito_18
@@ -59,6 +62,9 @@ font:
     bpp: 8
     glyphs: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~°€ÄÖÜäöüß"
     # glyphsets: ${glyphsets | default("GF_Latin_Kernel")}
+    extras:
+      - file: 'https://github.com/Templarian/MaterialDesign-Webfont/raw/v7.4.47/fonts/materialdesignicons-webfont.ttf'
+        glyphs: [ "\U000F0140" ]
   - file: "esphome-modular-lvgl-buttons/assets/fonts/Nunito-SemiBold.ttf"
     id: nunito_14
     size: 14
