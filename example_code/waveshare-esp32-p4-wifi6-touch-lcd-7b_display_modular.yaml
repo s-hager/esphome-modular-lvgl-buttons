@@ -20,6 +20,8 @@ substitutions:
   display_night_minute: "0"    # Minute for night mode (0-59)
   display_backlight_timeout_always_enabled: "false"  # Set true to dim/off in all modes, not just Night
   display_backlight_timeout_initial: "5"  # Initial backlight timeout in minutes (-1 to disable)
+  # defaults for popup pages
+  popup_timeout_seconds: '120'  # timeout in seconds  
 
 esphome:
   name: "waveshare-touch-lcd-7b"
@@ -36,12 +38,6 @@ logger:
     lvgl: info
   hardware_uart: UART0
 
-# Some screens need little_endian byte order and some need big_endian
-# this sets the byte order for all the images loaded in this file and the packages as well
-image:
-  defaults:
-    byte_order: little_endian
-
 # Time update script - This is run once per second. Use it to update any time related labels.
 script:
   # --------------------------------------------------------------------------
@@ -56,22 +52,21 @@ script:
 
 packages:
   # Generic configuration for ESP32 screens
-  # SDL has no Wi-Fi
+  # Include Wi-Fi support
   wifi: !include esphome-modular-lvgl-buttons/common/wifi.yaml
   # Enable OTA updates with a status screen
   ota_screen: !include esphome-modular-lvgl-buttons/common/ota.yaml
-  # All the colors
-  theme:  !include esphome-modular-lvgl-buttons/common/theme/index.yaml
-  # Some nice basic fonts
-  # 1000s of glyphs
-  # Some basic sensors
+   # Some basic sensors
   sensors: !include esphome-modular-lvgl-buttons/common/sensors_base.yaml
-  # Styles + Themes
+  # Styles + Themes + Some nice basic fonts + 1000s of glyphs + all the colors
+  theme:  !include esphome-modular-lvgl-buttons/common/theme/index.yaml
   # Use this theme for debugging
   # theme:  !include esphome-modular-lvgl-buttons/common/theme/index_debug.yaml  # uncomment to enable debug outlines
   # Include if your touch screen has a backlight. Also sets the time from HA
   backlight: !include esphome-modular-lvgl-buttons/common/backlight_time.yaml
-
+  # Popup system — code for popup pages lives here, but the popups themselves are defined in the UI section below
+  popup_system: !include esphome-modular-lvgl-buttons/ui/popup/popup_system.yaml
+  
   # Hardware description file
   hardware: !include
     file: esphome-modular-lvgl-buttons/hardware/waveshare-esp32-p4-wifi6-touch-lcd-7b.yaml

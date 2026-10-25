@@ -9,7 +9,7 @@ substitutions:
   screen_width: 480
 
 esphome:
-  min_version: 2026.4.0
+  min_version: 2026.7.0
   project:
     name: "Guition.ESP32-S3-4848S040"
     version: "1.0"
@@ -28,6 +28,9 @@ psram:
 
 preferences:
   flash_write_interval: 5min
+  
+logger:
+  hardware_uart: UART0  
 
 # -------------------------------------------
 # Internal outputs
@@ -96,8 +99,12 @@ spi:
 
 display:
   - platform: mipi_rgb
-    id: my_display
     model: GUITION-4848S040
-    dimensions:
-      width: 480
-      height: 480
+    id: my_display
+    color_order: RGB
+    # 6 MHz pixel clock gives the bounce buffer more headroom during LVGL
+    # full-screen flushes (e.g. new artwork). 8 MHz still works but leaves
+    # less margin and produces brief tearing marks on heavy redraws.
+    pclk_frequency: 6MHz
+    update_interval: never
+    auto_clear_enabled: False
